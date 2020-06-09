@@ -1,9 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import {Table, Button, Modal, Input, Form, Switch} from 'antd';
+import {Table, Button, Modal, Input, Form, Switch, Checkbox} from 'antd';
 import {connect} from 'react-redux';
 import {bindActionCreators} from "redux";
 import {withRouter} from 'react-router-dom';
-import { Checkbox } from 'antd';
 
 import {addPost} from '../../Actions/post.action';
 
@@ -78,6 +77,18 @@ const Post = (props) => {
     setBody('');
     setVisible(false);
   };
+  const checkList = [];
+  const onChange = (e) => {
+    let item = e.target.value;
+    if (e.target.checked) {
+      checkList.push(item);
+    } else {
+      checkList.splice(checkList.indexOf(item), 1);
+    }
+    console.log(`checked = ${e.target.checked}`);
+    console.log(`checked item= ${e.target.value}`);
+    console.log(`checked lists= ${checkList}`);
+  };
 
   return (
     <div>
@@ -105,7 +116,10 @@ const Post = (props) => {
         <Button type="primary" htmlType="submit" onClick={() => {addPostData()}}>
           Add Post
         </Button>
-
+        <Checkbox value='checkbox1' onChange={(e) => onChange(e)}>Checkbox1</Checkbox>
+        <Checkbox value='checkbox2' onChange={(e) => onChange(e)}>Checkbox2</Checkbox>
+        <Checkbox value='checkbox3' onChange={(e) => onChange(e)}>Checkbox3</Checkbox>
+        <Checkbox value='checkbox4' onChange={(e) => onChange(e)}>Checkbox4</Checkbox>
         {/*<Form.Item label="Post Tags">*/}
         {/*  <Checkbox.Group*/}
         {/*    options={plainOptions}*/}
